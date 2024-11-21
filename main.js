@@ -1,4 +1,5 @@
 const path = require("path");
+const { unzip, readDir, grayScale, sepia } = require("./IOhandler.js");
 
 const IOhandler = require("./IOhandler");
 const zipFilePath = path.join(__dirname, "myfile.zip");
