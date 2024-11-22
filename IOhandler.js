@@ -12,8 +12,8 @@ const yauzl = require("yauzl-promise"),
  * @param {string} pathOut
  * @return {promise}
  */
-const inputPath = path.join(__dirname, "./myfile.zip");
-const outputPath = path.join(__dirname, "./unzipped/");
+const inputPath = "myfile.zip";
+const outputPath = "unzipped/";
 
 async function checkFolder() {
   try {
@@ -57,9 +57,7 @@ let picArray = [];
 const readDir = async (dir) => {
   try {
     const files = await fs.readdir(dir);
-    const pngFiles = files
-      .filter((file) => path.extname(file) === ".png")
-      .map((file) => path.join(dir, file));
+    const pngFiles = files.filter((file) => path.extname(file) === ".png");
     picArray = [...pngFiles];
     return picArray;
   } catch (error) {
@@ -77,9 +75,6 @@ const readDir = async (dir) => {
  * @param {string} pathProcessed
  * @return {promise}
  */
-
-const fileInput = "./unzipped/in.png";
-const fileOutput = "./grayscaled/out.png";
 
 const grayScale = async (pathIn, pathOut) => {
   createReadStream(pathIn)
@@ -99,7 +94,7 @@ const grayScale = async (pathIn, pathOut) => {
     });
 };
 
-grayScale(fileInput, fileOutput);
+// grayScale(fileInput, fileOutput);
 
 const sepia = async (pathIn, pathOut) => {
   createReadStream(pathIn)
@@ -110,6 +105,7 @@ const sepia = async (pathIn, pathOut) => {
         let g = this.data[i + 1];
         let b = this.data[i + 2];
         let a = this.data[i + 3];
+        // const [cR, cB, cG] = filter(r, g, b, "sepia");
 
         let tr = 0.393 * r + 0.769 * g + 0.189 * b;
         let tg = 0.349 * r + 0.686 * g + 0.168 * b;
@@ -123,7 +119,7 @@ const sepia = async (pathIn, pathOut) => {
     });
 };
 
-sepia("./unzipped/in1.png", "./sepia/out1.png");
+// sepia("./unzipped/in1.png", "./sepia/out1.png");
 
 module.exports = {
   unzip,
